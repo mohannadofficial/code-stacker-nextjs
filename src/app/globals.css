@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("../styles/theme.css");
+@import url("@/styles/theme.css");
 
 body {
   font-family: "Inter", sans-serif;
@@ -22,7 +22,7 @@ body {
   }
 
   .card-wrapper {
-    @apply bg-light-900 dark:dark-gradient shadow-light-100 dark:shadow-dark-100;
+    @apply dark:dark-gradient bg-light-900 shadow-light-100 dark:shadow-dark-100;
   }
 
   .btn {
@@ -38,7 +38,7 @@ body {
   }
 
   .markdown {
-    @apply prose dark:prose-p:text-light-700 dark:prose-ol:text-light-700 dark:prose-ul:text-light-500 dark:prose-strong:text-white dark:prose-headings:text-white prose-headings:text-dark-400 prose-h1:text-dark-300 prose-h2:text-dark-300 prose-p:text-dark-500 prose-ul:text-dark-500 prose-ol:text-dark-500 max-w-full;
+    @apply prose max-w-full prose-headings:text-dark-400 prose-h1:text-dark-300 prose-h2:text-dark-300 prose-p:text-dark-500 prose-ol:text-dark-500 prose-ul:text-dark-500 dark:prose-headings:text-white dark:prose-p:text-light-700 dark:prose-strong:text-white dark:prose-ol:text-light-700 dark:prose-ul:text-light-500;
   }
 
   .primary-gradient {
@@ -54,7 +54,7 @@ body {
   }
 
   .tab {
-    @apply dark:bg-dark-400 bg-light-800 text-light-500 dark:data-[state=active]:bg-dark-300 data-[state=active]:bg-primary-100 data-[state=active]:text-primary-500 min-h-full !important;
+    @apply min-h-full bg-light-800 text-light-500 data-[state=active]:bg-primary-100 data-[state=active]:text-primary-500 dark:bg-dark-400 dark:data-[state=active]:bg-dark-300 !important;
   }
 }
 
