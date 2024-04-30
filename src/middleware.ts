@@ -1,7 +1,7 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const isProtecRoute = createRouteMatcher([
-  "/",
+  //"/",
   "/api/webhook",
   "/question/:id",
   "/tags",
