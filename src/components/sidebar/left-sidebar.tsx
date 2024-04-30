@@ -1,7 +1,7 @@
 import Link from "next/link";
-import SideContent from "./side-content";
+import SideContent from "../side-content";
 import { SignedOut } from "@clerk/nextjs";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import Image from "next/image";
 
 const LeftSideBar = () => {
