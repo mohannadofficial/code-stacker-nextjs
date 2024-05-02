@@ -18,6 +18,7 @@ const SideContent = ({ isLeftSideBar = false }: Props) => {
       pathname === item.route;
     return (
       <Link
+        key={item.route}
         href={item.route}
         className={cn(
           "flex items-center justify-start gap-4 bg-transparent p-4",
