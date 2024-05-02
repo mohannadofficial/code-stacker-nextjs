@@ -1,7 +1,7 @@
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import Link from "next/link";
-import Tags from "./tags";
-import Metric from "./metric";
+import Tags from "../tags";
+import Metric from "../metric";
 
 interface Props {
   _id: string;

@@ -1,10 +1,11 @@
 import Empty from "@/components/empty";
 import Filter from "@/components/filter";
 import HomeFilter from "@/components/home-filter";
-import QuestionCard from "@/components/question-card";
+import QuestionCard from "@/components/question/question-card";
 import Search from "@/components/search";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
+import Link from "next/link";
 
 const questions = [
   {
@@ -50,7 +51,9 @@ const HomePage = () => {
         <h1 className="h1-bold text-dark100_light900 text-center ">
           All Questions
         </h1>
-        <Button variant="primaryGradient">Ask a Question</Button>
+        <Button variant="primaryGradient">
+          <Link href="/ask-question">Ask a Question</Link>
+        </Button>
       </div>
       <div className="mt-11 flex justify-center gap-5 max-sm:flex-col sm:items-center">
         <Search
