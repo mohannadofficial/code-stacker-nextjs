@@ -1,15 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-const isProtecRoute = createRouteMatcher([
-  //"/",
-  "/api/webhook",
-  "/question/:id",
-  "/tags",
-  "/tags/:id",
-  "/profile/:id",
-  "/community",
-  "/jobs",
-]);
+const isProtecRoute = createRouteMatcher(["/ask-question"]);
 
 export default clerkMiddleware(
   (auth, req) => {

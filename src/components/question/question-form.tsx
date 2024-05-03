@@ -20,12 +20,20 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import { usePathname, useRouter } from "next/navigation";
+import { createQuestion } from "@/actions/question";
 
-const type: any = "create";
+interface Props {
+  userId: string;
+}
 
-const QuestionForm = () => {
+const type: string = "create";
+
+const QuestionForm = ({ userId }: Props) => {
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const form = useForm<z.infer<typeof QuestionsSchema>>({
     resolver: zodResolver(QuestionsSchema),
@@ -36,11 +44,21 @@ const QuestionForm = () => {
     },
   });
 
-  const onSubmit = async (value: z.infer<typeof QuestionsSchema>) => {
+  const onSubmit = async (values: z.infer<typeof QuestionsSchema>) => {
+    setIsSubmitting(true);
     try {
-      setIsSubmitting(true);
+      await createQuestion({
+        title: values.title,
+        content: values.explanation,
+        tags: values.tags,
+        path: pathname,
+        author: JSON.parse(userId),
+      });
+
+      router.push("/");
     } catch (error) {
     } finally {
+      setIsSubmitting(false);
     }
   };
 
