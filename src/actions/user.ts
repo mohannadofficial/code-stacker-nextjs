@@ -1,14 +1,28 @@
 "use server";
 
 import Question from "@/db/question.model";
-import User from "@/db/user.model";
+import User, { IUser } from "@/db/user.model";
 import { connectDB } from "@/lib/mongoose";
 import {
   CreateUserParams,
   DeleteUserParams,
+  GetAllUsersParams,
   UpdateUserParams,
 } from "@/types/shared";
 import { revalidatePath } from "next/cache";
+
+export async function getUsers(params: GetAllUsersParams) {
+  try {
+    await connectDB();
+
+    const users = await User.find({}).sort({ createdAt: -1 });
+
+    return { users };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
 
 export async function getUserById(userId: string) {
   try {
