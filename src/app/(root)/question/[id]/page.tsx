@@ -1,8 +1,12 @@
 import { getQuestionById } from "@/actions/question";
+import { getUserById } from "@/actions/user";
+import Answers from "@/components/answers";
+import AnswerForm from "@/components/form/answer-form";
 import Metric from "@/components/metric";
 import ParseHTML from "@/components/parse-html";
 import Tags from "@/components/tags";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
+import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,6 +16,14 @@ interface Props {
 }
 
 const QuestionPage = async ({ params, searchParams }: Props) => {
+  const { userId: clerkId } = auth();
+
+  let mongoUser;
+
+  if (clerkId) {
+    mongoUser = await getUserById(clerkId);
+  }
+
   const question = await getQuestionById({ questionId: params.id });
 
   return (
@@ -70,6 +82,22 @@ const QuestionPage = async ({ params, searchParams }: Props) => {
           <Tags key={tag._id} _id={tag._id} name={tag.name} showCount={false} />
         ))}
       </div>
+
+      <div className="mt-8 border-b dark:border-b-gray-600" />
+
+      <Answers
+        questionId={question._id}
+        userId={JSON.stringify(mongoUser._id)}
+        totalAnswers={question.answers.length}
+      />
+
+      {mongoUser && (
+        <AnswerForm
+          question={question.content}
+          questionId={JSON.stringify(question._id)}
+          authorId={JSON.stringify(mongoUser._id)}
+        />
+      )}
     </>
   );
 };

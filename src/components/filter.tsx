@@ -23,7 +23,7 @@ const Filter = ({ filters, containerClasses, otherClasses }: Props) => {
       <Select>
         <SelectTrigger
           className={cn(
-            "body-regular light-border background-light800_dark300 text-dark500_light700 border px-5 py-2.5",
+            "body-regular light-border  background-light800_dark300 text-dark500_light700 border px-5 py-2.5",
             otherClasses,
           )}
         >

@@ -1,7 +1,7 @@
 import { getUsers } from "@/actions/user";
 import Filter from "@/components/filter";
 import Search from "@/components/search";
-import UserCard from "@/components/user-card";
+import UserCard from "@/components/card/user-card";
 import { UserFilters } from "@/constants/filters";
 import Link from "next/link";
 import React from "react";

@@ -4,7 +4,6 @@ import Filter from "@/components/filter";
 import Search from "@/components/search";
 import { UserFilters } from "@/constants/filters";
 import Link from "next/link";
-import React from "react";
 
 const TagsPage = async () => {
   const { tags } = await getTags({});

@@ -3,8 +3,8 @@ import { getTopInteractedTags } from "@/actions/tag";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Tags from "./tags";
-import { Badge } from "./ui/badge";
+import Tags from "../tags";
+import { Badge } from "../ui/badge";
 
 interface Props {
   user: {

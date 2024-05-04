@@ -22,6 +22,7 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { createQuestion } from "@/actions/question";
+import { useTheme } from "@/context/ThemeProvider";
 
 interface Props {
   userId: string;
@@ -30,6 +31,7 @@ interface Props {
 const type: string = "create";
 
 const QuestionForm = ({ userId }: Props) => {
+  const { mode } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
@@ -167,8 +169,9 @@ const QuestionForm = ({ userId }: Props) => {
                       "undo redo | " +
                       "codesample | bold italic forecolor | alignleft aligncenter |" +
                       "alignright alignjustify | bullist numlist",
-                    content_style:
-                      "body { font-family:Inter; font-size:16px; }",
+                    content_style: "body { font-family:Inter; font-size:16px }",
+                    skin: mode === "dark" ? "oxide-dark" : "oxide",
+                    content_css: mode === "dark" ? "dark" : "light",
                   }}
                 />
               </FormControl>

@@ -36,7 +36,7 @@ const Search = ({
         type="text"
         placeholder={placeholder}
         defaultValue=""
-        className="paragraph-regular no-focus placeholder background-light800_darkgradient border-none shadow-none outline-none dark:text-white"
+        className="paragraph-regular no-focus placeholder background-light800_darkgradient border-none shadow-none outline-none dark:bg-dark-200 dark:text-white"
       />
     </div>
   );
