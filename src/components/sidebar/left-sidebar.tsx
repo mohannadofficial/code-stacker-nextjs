@@ -7,7 +7,7 @@ import Image from "next/image";
 const LeftSideBar = () => {
   return (
     <section className="background-light900_dark200 light-border custom-scrollbar dark:dark-custom-scrollbar sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto p-6 pt-36 shadow-light-300 dark:shadow-none max-sm:hidden lg:w-[266px] ">
-      <div className="flex flex-1 flex-col gap-6">
+      <div className="flex flex-1 flex-col gap-1">
         <SideContent isLeftSideBar={true} />
       </div>
       <SignedOut>

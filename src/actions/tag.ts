@@ -1,8 +1,22 @@
 "use server";
 
+import Tag from "@/db/tag.model";
 import User from "@/db/user.model";
 import { connectDB } from "@/lib/mongoose";
-import { GetTopInteractedTagsParams } from "@/types/shared";
+import { GetAllTagsParams, GetTopInteractedTagsParams } from "@/types/shared";
+
+export async function getTags(params: GetAllTagsParams) {
+  try {
+    await connectDB();
+
+    const tags = await Tag.find({});
+
+    return { tags };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
 
 export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
   try {
