@@ -3,7 +3,11 @@
 import Answer from "@/db/answer.model";
 import Question from "@/db/question.model";
 import { connectDB } from "@/lib/mongoose";
-import { CreateAnswerParams, GetAnswersParams } from "@/types/shared";
+import {
+  AnswerVoteParams,
+  CreateAnswerParams,
+  GetAnswersParams,
+} from "@/types/shared";
 import { revalidatePath } from "next/cache";
 
 export async function createAnswer(params: CreateAnswerParams) {
@@ -36,6 +40,78 @@ export async function getAnswers(params: GetAnswersParams) {
       .sort({ createdAt: -1 });
 
     return { answers };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function upvoteAnswer(params: AnswerVoteParams) {
+  try {
+    await connectDB();
+
+    const { answerId, userId, hasupVoted, hasdownVoted, path } = params;
+
+    let updateQuery = {};
+
+    if (hasupVoted) {
+      updateQuery = { $pull: { upvotes: userId } };
+    } else if (hasdownVoted) {
+      updateQuery = {
+        $pull: { downvotes: userId },
+        $push: { upvotes: userId },
+      };
+    } else {
+      updateQuery = { $addToSet: { upvotes: userId } };
+    }
+
+    const answer = await Answer.findByIdAndUpdate(answerId, updateQuery, {
+      new: true,
+    });
+
+    if (!answer) {
+      throw new Error("Answer not found");
+    }
+
+    // Increment author's reputation
+
+    revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function downvoteAnswer(params: AnswerVoteParams) {
+  try {
+    await connectDB();
+
+    const { answerId, userId, hasupVoted, hasdownVoted, path } = params;
+
+    let updateQuery = {};
+
+    if (hasdownVoted) {
+      updateQuery = { $pull: { downvotes: userId } };
+    } else if (hasupVoted) {
+      updateQuery = {
+        $pull: { upvotes: userId },
+        $push: { downvotes: userId },
+      };
+    } else {
+      updateQuery = { $addToSet: { downvotes: userId } };
+    }
+
+    const answer = await Answer.findByIdAndUpdate(answerId, updateQuery, {
+      new: true,
+    });
+
+    if (!answer) {
+      throw new Error("Answer not found");
+    }
+
+    // Increment author's reputation
+
+    revalidatePath(path);
   } catch (error) {
     console.log(error);
     throw error;

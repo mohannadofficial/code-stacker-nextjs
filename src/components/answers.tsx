@@ -5,6 +5,7 @@ import { getTimestamp } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 import ParseHTML from "./parse-html";
+import Votes from "./votes";
 
 interface Props {
   questionId: string;
@@ -57,7 +58,17 @@ const Answers = async ({
                     </p>
                   </div>
                 </Link>
-                <div className="flex justify-end">VOTING</div>
+                <div className="flex justify-end">
+                  <Votes
+                    type="Answer"
+                    itemId={JSON.stringify(answer._id)}
+                    userId={JSON.stringify(userId)}
+                    upvotes={answer.upvotes.length}
+                    hasupVoted={answer.upvotes.includes(userId)}
+                    downvotes={answer.downvotes.length}
+                    hasdownVoted={answer.downvotes.includes(userId)}
+                  />
+                </div>
               </div>
             </div>
             <ParseHTML data={answer.content} />

@@ -5,6 +5,7 @@ import AnswerForm from "@/components/form/answer-form";
 import Metric from "@/components/metric";
 import ParseHTML from "@/components/parse-html";
 import Tags from "@/components/tags";
+import Votes from "@/components/votes";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
@@ -44,7 +45,18 @@ const QuestionPage = async ({ params, searchParams }: Props) => {
               {question.author.name}
             </p>
           </Link>
-          <div className="flex justify-end">VOTING</div>
+          <div className="flex justify-end">
+            <Votes
+              type="Question"
+              itemId={JSON.stringify(question._id)}
+              userId={JSON.stringify(mongoUser._id)}
+              upvotes={question.upvotes.length}
+              hasupVoted={question.upvotes.includes(mongoUser._id)}
+              downvotes={question.downvotes.length}
+              hasdownVoted={question.downvotes.includes(mongoUser._id)}
+              hasSaved={mongoUser?.saved.includes(question._id)}
+            />
+          </div>
         </div>
         <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">
           {question.title}
@@ -87,7 +99,7 @@ const QuestionPage = async ({ params, searchParams }: Props) => {
 
       <Answers
         questionId={question._id}
-        userId={JSON.stringify(mongoUser._id)}
+        userId={mongoUser._id}
         totalAnswers={question.answers.length}
       />
 
