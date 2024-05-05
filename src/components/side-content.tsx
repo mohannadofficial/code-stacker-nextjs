@@ -21,7 +21,7 @@ const SideContent = ({ isLeftSideBar = false }: Props) => {
         key={item.route}
         href={item.route}
         className={cn(
-          "flex items-center justify-start gap-4 bg-transparent p-4",
+          "flex items-center justify-start gap-4 bg-transparent p-4 ",
           isActive
             ? "primary-gradient rounded-lg text-light-900"
             : "text-dark300_light900",
