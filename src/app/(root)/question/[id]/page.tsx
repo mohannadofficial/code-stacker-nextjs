@@ -7,16 +7,12 @@ import ParseHTML from "@/components/parse-html";
 import Tags from "@/components/tags";
 import Votes from "@/components/votes";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
+import { URLProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 
-interface Props {
-  params: { id: string };
-  searchParams: any;
-}
-
-const QuestionPage = async ({ params, searchParams }: Props) => {
+const QuestionPage = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();
 
   let mongoUser;
