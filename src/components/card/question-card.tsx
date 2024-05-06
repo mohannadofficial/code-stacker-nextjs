@@ -19,9 +19,11 @@ interface Props {
   views: number;
   answers: Array<object>;
   createdAt: Date;
+  clerkId?: string;
 }
 
 const QuestionCard = ({
+  clerkId,
   _id,
   answers,
   author,
@@ -39,7 +41,7 @@ const QuestionCard = ({
             {getTimestamp(createdAt)}
           </span>
           <Link href={`/question/${_id}`}>
-            <h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-1 flex-1">
+            <h3 className="sm:h3-semibold base-semibold text-dark200_light900 flex-1  overflow-ellipsis text-wrap max-md:max-w-lg">
               {title}
             </h3>
           </Link>

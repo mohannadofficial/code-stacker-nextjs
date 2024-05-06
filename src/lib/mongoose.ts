@@ -10,7 +10,7 @@ export const connectDB = async () => {
   }
 
   if (isConnected) {
-    return console.log("MongoDB Already Connected");
+    return;
   }
 
   try {
