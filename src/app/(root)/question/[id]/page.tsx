@@ -1,6 +1,7 @@
 import { getQuestionById } from "@/actions/question";
 import { getUserById } from "@/actions/user";
 import Answers from "@/components/answers";
+import Edit from "@/components/edit";
 import AnswerForm from "@/components/form/answer-form";
 import Metric from "@/components/metric";
 import ParseHTML from "@/components/parse-html";
@@ -41,7 +42,7 @@ const QuestionPage = async ({ params, searchParams }: URLProps) => {
               {question.author.name}
             </p>
           </Link>
-          <div className="flex justify-end">
+          <div className="flex justify-end gap-4">
             <Votes
               type="Question"
               itemId={JSON.stringify(question._id)}
@@ -52,6 +53,7 @@ const QuestionPage = async ({ params, searchParams }: URLProps) => {
               hasdownVoted={question.downvotes.includes(mongoUser._id)}
               hasSaved={mongoUser?.saved.includes(question._id)}
             />
+            <Edit itemId={JSON.stringify(question._id)} />
           </div>
         </div>
         <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">
