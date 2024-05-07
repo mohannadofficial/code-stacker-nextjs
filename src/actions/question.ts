@@ -14,14 +14,24 @@ import {
   GetQuestionsParams,
   QuestionVoteParams,
 } from "@/types/shared";
+import { FilterQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
     await connectDB();
-    const { searchQuery, filter, page = 1, pageSize = 10 } = params;
+    const { searchQuery } = params;
 
-    const questions = await Question.find({})
+    const query: FilterQuery<typeof Question> = {};
+
+    if (searchQuery) {
+      query.$or = [
+        { title: { $regex: new RegExp(searchQuery, "i") } },
+        { content: { $regex: new RegExp(searchQuery, "i") } },
+      ];
+    }
+
+    const questions = await Question.find(query)
       .populate({ path: "tags", model: Tag })
       .populate({ path: "author", model: User })
       .sort({ createdAt: -1 });

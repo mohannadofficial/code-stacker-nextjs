@@ -27,7 +27,7 @@ const UserCard = async ({ user }: Props) => {
             alt="user profile picture"
             width={100}
             height={100}
-            className="rounded-full"
+            className="mx-auto rounded-full"
           />
 
           <div className="mt-4 text-center">

@@ -7,9 +7,12 @@ import Search from "@/components/search";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
 import Link from "next/link";
+import { SearchParamsProps } from "@/types";
 
-const HomePage = async () => {
-  const questions = await getQuestions({});
+const HomePage = async ({ searchParams }: SearchParamsProps) => {
+  const questions = await getQuestions({
+    searchQuery: searchParams.q,
+  });
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">

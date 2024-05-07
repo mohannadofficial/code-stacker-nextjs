@@ -4,14 +4,16 @@ import Empty from "@/components/empty";
 import Filter from "@/components/filter";
 import Search from "@/components/search";
 import { QuestionFilters } from "@/constants/filters";
+import { SearchParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
 
-const CollectionPage = async () => {
+const CollectionPage = async ({ searchParams }: SearchParamsProps) => {
   const { userId } = auth();
   if (!userId) return null;
 
   const { collections } = await getSavedQuestions({
     clerkId: userId,
+    searchQuery: searchParams.q,
   });
 
   return (

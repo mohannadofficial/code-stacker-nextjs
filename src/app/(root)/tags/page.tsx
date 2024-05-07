@@ -3,10 +3,13 @@ import Empty from "@/components/empty";
 import Filter from "@/components/filter";
 import Search from "@/components/search";
 import { UserFilters } from "@/constants/filters";
+import { SearchParamsProps } from "@/types";
 import Link from "next/link";
 
-const TagsPage = async () => {
-  const { tags } = await getTags({});
+const TagsPage = async ({ searchParams }: SearchParamsProps) => {
+  const { tags } = await getTags({
+    searchQuery: searchParams.q,
+  });
   return (
     <>
       <h1 className="h1-bold text-dark100_light900">All Tags</h1>
