@@ -2,13 +2,14 @@ import { getTags } from "@/actions/tag";
 import Empty from "@/components/empty";
 import Filter from "@/components/filter";
 import Search from "@/components/search";
-import { UserFilters } from "@/constants/filters";
+import { TagFilters } from "@/constants/filters";
 import { SearchParamsProps } from "@/types";
 import Link from "next/link";
 
 const TagsPage = async ({ searchParams }: SearchParamsProps) => {
   const { tags } = await getTags({
     searchQuery: searchParams.q,
+    filter: searchParams.filter,
   });
   return (
     <>
@@ -23,7 +24,7 @@ const TagsPage = async ({ searchParams }: SearchParamsProps) => {
         />
 
         <Filter
-          filters={UserFilters}
+          filters={TagFilters}
           otherClasses="min-h-[56px] sm:min-w-[170px]"
         />
       </div>
