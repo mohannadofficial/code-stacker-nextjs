@@ -53,7 +53,9 @@ const QuestionPage = async ({ params, searchParams }: URLProps) => {
               hasdownVoted={question.downvotes.includes(mongoUser._id)}
               hasSaved={mongoUser?.saved.includes(question._id)}
             />
-            <Edit itemId={JSON.stringify(question._id)} />
+            {clerkId === mongoUser.clerkId && (
+              <Edit itemId={JSON.stringify(question._id)} />
+            )}
           </div>
         </div>
         <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">
