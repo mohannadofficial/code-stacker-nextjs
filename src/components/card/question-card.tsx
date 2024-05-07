@@ -2,6 +2,9 @@ import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import Link from "next/link";
 import Tags from "../tags";
 import Metric from "../metric";
+import { SignedIn } from "@clerk/nextjs";
+import Edit from "../edit";
+import Delete from "../delete";
 
 interface Props {
   _id: string;
@@ -14,6 +17,7 @@ interface Props {
     _id: string;
     name: string;
     picture: string;
+    clerkId?: string;
   };
   upvotes: string[];
   views: number;
@@ -33,6 +37,7 @@ const QuestionCard = ({
   upvotes,
   views,
 }: Props) => {
+  const showActionButtons = clerkId && clerkId === author.clerkId;
   return (
     <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
@@ -46,7 +51,14 @@ const QuestionCard = ({
             </h3>
           </Link>
         </div>
-        {/* if signed in add edit delete action */}
+        <SignedIn>
+          {showActionButtons && (
+            <div className="flex items-center justify-end gap-3 max-sm:w-full">
+              <Edit itemId={JSON.stringify(_id)} />
+              <Delete type="Question" itemId={JSON.stringify(_id)} />
+            </div>
+          )}
+        </SignedIn>
       </div>
 
       <div className="mt-3.5 flex flex-wrap gap-2">
