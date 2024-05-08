@@ -1,15 +1,17 @@
 import { getTags } from "@/actions/tag";
 import Empty from "@/components/empty";
 import Filter from "@/components/filter";
+import Pagination from "@/components/pagination";
 import Search from "@/components/search";
 import { TagFilters } from "@/constants/filters";
 import { SearchParamsProps } from "@/types";
 import Link from "next/link";
 
 const TagsPage = async ({ searchParams }: SearchParamsProps) => {
-  const { tags } = await getTags({
+  const { tags, isNext, totalPages } = await getTags({
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams.page ? +searchParams.page : 1,
   });
   return (
     <>
@@ -62,6 +64,11 @@ const TagsPage = async ({ searchParams }: SearchParamsProps) => {
           />
         )}
       </section>
+      <Pagination
+        pageNumber={searchParams?.page ? +searchParams.page : 1}
+        isNext={isNext}
+        totalPages={totalPages}
+      />
     </>
   );
 };

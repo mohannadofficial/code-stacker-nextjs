@@ -2,16 +2,19 @@ import { getQuestionsByTagId } from "@/actions/tag";
 import Page from "@/app/(auth)/sign-in/[[...sign-in]]/page";
 import QuestionCard from "@/components/card/question-card";
 import Empty from "@/components/empty";
+import Pagination from "@/components/pagination";
 import Search from "@/components/search";
 import { IQuestion } from "@/db/question.model";
 import { URLProps } from "@/types";
 
 const QuestionByTagPage = async ({ params, searchParams }: URLProps) => {
-  const { questions, tagTitle } = await getQuestionsByTagId({
-    tagId: params.id,
-    page: 1,
-    searchQuery: searchParams.q,
-  });
+  const { questions, tagTitle, isNext, totalPages } = await getQuestionsByTagId(
+    {
+      tagId: params.id,
+      searchQuery: searchParams.q,
+      page: searchParams.page ? +searchParams.page : 1,
+    },
+  );
 
   return (
     <>
@@ -52,6 +55,11 @@ const QuestionByTagPage = async ({ params, searchParams }: URLProps) => {
           />
         )}
       </div>
+      <Pagination
+        totalPages={totalPages}
+        isNext={isNext}
+        pageNumber={searchParams.page ? +searchParams.page : 1}
+      />
     </>
   );
 };

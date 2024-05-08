@@ -8,15 +8,17 @@ import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
 import Link from "next/link";
 import { SearchParamsProps } from "@/types";
+import Pagination from "@/components/pagination";
 
 const HomePage = async ({ searchParams }: SearchParamsProps) => {
-  const questions = await getQuestions({
+  const { questions, isNext, totalPages } = await getQuestions({
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams.page ? +searchParams.page : 1,
   });
   return (
     <>
-      <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
+      <div className=" flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
         <h1 className="h1-bold text-dark100_light900 text-center ">
           All Questions
         </h1>
@@ -63,6 +65,11 @@ const HomePage = async ({ searchParams }: SearchParamsProps) => {
           />
         )}
       </div>
+      <Pagination
+        pageNumber={searchParams?.page ? +searchParams.page : 1}
+        isNext={isNext}
+        totalPages={totalPages}
+      />
     </>
   );
 };

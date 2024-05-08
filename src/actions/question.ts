@@ -20,7 +20,9 @@ import { revalidatePath } from "next/cache";
 export async function getQuestions(params: GetQuestionsParams) {
   try {
     await connectDB();
-    const { searchQuery, filter } = params;
+    const { searchQuery, filter, page = 1, pageSize = 2 } = params;
+
+    const skipAmount = (page - 1) * pageSize;
 
     const query: FilterQuery<typeof Question> = {};
 
@@ -49,9 +51,17 @@ export async function getQuestions(params: GetQuestionsParams) {
     const questions = await Question.find(query)
       .populate({ path: "tags", model: Tag })
       .populate({ path: "author", model: User })
-      .sort(sortOptions);
+      .sort(sortOptions)
+      .skip(skipAmount)
+      .limit(pageSize);
 
-    return questions;
+    const totalQuestions = await Question.countDocuments(query);
+
+    const totalPages = Math.ceil(totalQuestions / pageSize);
+
+    const isNext = totalQuestions > skipAmount + questions.length;
+
+    return { questions, isNext, totalPages };
   } catch (error) {
     console.log(error);
     throw error;

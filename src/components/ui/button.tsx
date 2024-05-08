@@ -13,6 +13,10 @@ const buttonVariants = cva(
           "paragraph-medium mt-5 min-h-[46px] rounded-lg bg-primary-500 px-4 py-3 text-light-900 hover:bg-primary-500 dark:bg-primary-500 dark:text-light-900",
         primaryGradient:
           "primary-gradient min-h-[46px] px-4 py-3 !text-light-900",
+        pagination:
+          "light-border-2 btn flex min-h-[36px] items-center justify-center gap-2 border body-medium text-dark200_light800",
+        paginationNumber:
+          "flex items-center justify-center rounded-md bg-primary-500 px-3.5 py-2 body-semibold text-light-900",
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",

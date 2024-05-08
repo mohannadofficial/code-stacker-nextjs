@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ParseHTML from "./parse-html";
 import Votes from "./votes";
+import Pagination from "./pagination";
 
 interface Props {
   questionId: string;
@@ -22,9 +23,9 @@ const Answers = async ({
   page,
   filter,
 }: Props) => {
-  const { answers } = await getAnswers({
+  const { answers, isNextAnswer, totalPages } = await getAnswers({
     questionId,
-    page: page ? page : 1,
+    page: page ? +page : 1,
     sortBy: filter,
   });
   return (
@@ -77,6 +78,11 @@ const Answers = async ({
           </article>
         ))}
       </div>
+      <Pagination
+        pageNumber={page ? +page : 1}
+        isNext={isNextAnswer}
+        totalPages={totalPages}
+      />
     </div>
   );
 };

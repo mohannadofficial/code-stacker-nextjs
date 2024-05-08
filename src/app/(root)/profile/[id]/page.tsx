@@ -5,7 +5,7 @@ import QuestionTab from "@/components/question-tab";
 import Stats from "@/components/stats";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getJoinedDate } from "@/lib/utils";
+import { getJoinedDate, removeKeysFromQuery } from "@/lib/utils";
 import { URLProps } from "@/types";
 import { SignedIn } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";

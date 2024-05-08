@@ -6,11 +6,13 @@ import { UserFilters } from "@/constants/filters";
 import Link from "next/link";
 import React from "react";
 import { SearchParamsProps } from "@/types";
+import Pagination from "@/components/pagination";
 
 const CommunityPage = async ({ searchParams }: SearchParamsProps) => {
-  const { users } = await getUsers({
+  const { users, isNext, totalPages } = await getUsers({
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams.page ? +searchParams.page : 1,
   });
 
   return (
@@ -43,6 +45,11 @@ const CommunityPage = async ({ searchParams }: SearchParamsProps) => {
           </div>
         )}
       </section>
+      <Pagination
+        isNext={isNext}
+        totalPages={totalPages}
+        pageNumber={searchParams?.page ? +searchParams.page : 1}
+      />
     </>
   );
 };
