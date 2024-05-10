@@ -74,7 +74,7 @@ const SearchResult = () => {
                 <Link
                   key={index + item.id + item.type}
                   href={renderLink(item.type, item.id)}
-                  className="flex w-full cursor-pointer items-start gap-3 px-5 py-2.5 hover:bg-light-700/50 dark:bg-dark-500/50"
+                  className="flex w-full cursor-pointer items-start gap-3 px-5 py-2.5 hover:bg-light-700/50 dark:bg-dark-400/50"
                 >
                   <Image
                     src="/assets/icons/tag.svg"

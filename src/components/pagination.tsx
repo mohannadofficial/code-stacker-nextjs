@@ -51,6 +51,7 @@ const Pagination = ({ isNext, pageNumber, totalPages }: Props) => {
       }
       number.push(
         <Button
+          key={i}
           disabled={pageNumber === i}
           onClick={() => handleNavigation("num", i)}
           variant={pageNumber === i ? "paginationNumber" : "pagination"}
@@ -74,6 +75,7 @@ const Pagination = ({ isNext, pageNumber, totalPages }: Props) => {
         }
         numbers.push(
           <Button
+            key={i}
             disabled={pageNumber === i}
             onClick={() => handleNavigation("num", i)}
             variant={pageNumber === i ? "paginationNumber" : "pagination"}

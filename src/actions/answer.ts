@@ -3,6 +3,7 @@
 import Answer from "@/db/answer.model";
 import Interaction from "@/db/interaction.model";
 import Question from "@/db/question.model";
+import User from "@/db/user.model";
 import { connectDB } from "@/lib/mongoose";
 import {
   AnswerVoteParams,
@@ -10,6 +11,7 @@ import {
   DeleteAnswerParams,
   GetAnswersParams,
 } from "@/types/shared";
+
 import { revalidatePath } from "next/cache";
 
 export async function createAnswer(params: CreateAnswerParams) {
@@ -20,9 +22,19 @@ export async function createAnswer(params: CreateAnswerParams) {
 
     const newAnswer = await Answer.create({ content, author, question });
 
-    await Question.findByIdAndUpdate(question, {
+    const questionObject = await Question.findByIdAndUpdate(question, {
       $push: { answers: newAnswer._id },
     });
+
+    await Interaction.create({
+      user: author,
+      action: "answer",
+      question,
+      answer: newAnswer._id,
+      tags: questionObject.tags,
+    });
+
+    await User.findByIdAndUpdate(author, { $inc: { reputation: 10 } });
 
     revalidatePath(path);
   } catch (error) {
@@ -106,6 +118,13 @@ export async function upvoteAnswer(params: AnswerVoteParams) {
     }
 
     // Increment author's reputation
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasupVoted ? -2 : 2 },
+    });
+
+    await User.findByIdAndUpdate(answer.author, {
+      $inc: { reputation: hasupVoted ? -10 : 10 },
+    });
 
     revalidatePath(path);
   } catch (error) {
@@ -141,7 +160,13 @@ export async function downvoteAnswer(params: AnswerVoteParams) {
       throw new Error("Answer not found");
     }
 
-    // Increment author's reputation
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasdownVoted ? -2 : 2 },
+    });
+
+    await User.findByIdAndUpdate(answer.author, {
+      $inc: { reputation: hasdownVoted ? -10 : 10 },
+    });
 
     revalidatePath(path);
   } catch (error) {

@@ -32,7 +32,7 @@ export async function searchGlobal(params: SearchParams) {
       for (const { model, searchField, type } of modelsAndTypes) {
         const queryResults = await model
           .find({ [searchField]: regexQuery })
-          .limit(8);
+          .limit(2);
 
         result.push(
           ...queryResults.map((item) => ({
