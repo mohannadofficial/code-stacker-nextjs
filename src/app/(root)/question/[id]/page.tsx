@@ -37,6 +37,7 @@ const QuestionPage = async ({ params, searchParams }: URLProps) => {
               alt="profile"
               width={22}
               height={22}
+              className="rounded-full"
             />
             <p className="paragraph-semibold text-dark300_light700">
               {question.author.name}
@@ -46,14 +47,14 @@ const QuestionPage = async ({ params, searchParams }: URLProps) => {
             <Votes
               type="Question"
               itemId={JSON.stringify(question._id)}
-              userId={JSON.stringify(mongoUser._id)}
+              userId={JSON.stringify(mongoUser?._id)}
               upvotes={question.upvotes.length}
-              hasupVoted={question.upvotes.includes(mongoUser._id)}
+              hasupVoted={question.upvotes.includes(mongoUser?._id)}
               downvotes={question.downvotes.length}
-              hasdownVoted={question.downvotes.includes(mongoUser._id)}
+              hasdownVoted={question.downvotes.includes(mongoUser?._id)}
               hasSaved={mongoUser?.saved.includes(question._id)}
             />
-            {clerkId === mongoUser.clerkId && (
+            {clerkId === mongoUser?.clerkId && (
               <Edit itemId={JSON.stringify(question._id)} />
             )}
           </div>
@@ -99,7 +100,7 @@ const QuestionPage = async ({ params, searchParams }: URLProps) => {
 
       <Answers
         questionId={question._id}
-        userId={mongoUser._id}
+        userId={mongoUser?._id}
         totalAnswers={question.answers.length}
       />
 
@@ -107,7 +108,7 @@ const QuestionPage = async ({ params, searchParams }: URLProps) => {
         <AnswerForm
           question={question.content}
           questionId={JSON.stringify(question._id)}
-          authorId={JSON.stringify(mongoUser._id)}
+          authorId={JSON.stringify(mongoUser?._id)}
         />
       )}
     </>

@@ -9,7 +9,6 @@ import {
   GetQuestionsByTagIdParams,
   GetTopInteractedTagsParams,
 } from "@/types/shared";
-import console from "console";
 import { FilterQuery } from "mongoose";
 
 export async function getTags(params: GetAllTagsParams) {
@@ -88,11 +87,8 @@ export async function getQuestionsByTagId(params: GetQuestionsByTagIdParams) {
   try {
     await connectDB();
 
-    const { tagId, page = 1, pageSize = 1, searchQuery } = params;
-    // 20 item
-    // limit 2 (pagesize)
-    // page 1 => skip 0
-    // page 2 => skip 2
+    const { tagId, page = 1, pageSize = 10, searchQuery } = params;
+
     const skipAmount = (page - 1) * pageSize;
 
     const tagFilter: FilterQuery<ITag> = { _id: tagId };
