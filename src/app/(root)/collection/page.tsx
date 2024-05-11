@@ -7,6 +7,7 @@ import Search from "@/components/search";
 import { QuestionFilters } from "@/constants/filters";
 import { SearchParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
+import Loading from "./loading";
 
 const CollectionPage = async ({ searchParams }: SearchParamsProps) => {
   const { userId } = auth();

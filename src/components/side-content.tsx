@@ -42,7 +42,7 @@ const SideContent = ({ isLeftSideBar = false }: Props) => {
           alt={item.label}
           width={20}
           height={20}
-          className={cn(isActive && "invert-colors")}
+          className={cn("invert-colors", isActive && "invert-0 dark:invert")}
         />
         <p
           className={cn(
