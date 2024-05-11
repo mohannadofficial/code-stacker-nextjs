@@ -1,4 +1,4 @@
-import { getQuestions } from "@/actions/question";
+import { getQuestions, getRecommendedQuestions } from "@/actions/question";
 import Empty from "@/components/empty";
 import Filter from "@/components/filter";
 import HomeFilter from "@/components/home-filter";
@@ -9,13 +9,34 @@ import { HomePageFilters } from "@/constants/filters";
 import Link from "next/link";
 import { SearchParamsProps } from "@/types";
 import Pagination from "@/components/pagination";
+import { auth } from "@clerk/nextjs/server";
 
 const HomePage = async ({ searchParams }: SearchParamsProps) => {
-  const { questions, isNext, totalPages } = await getQuestions({
-    searchQuery: searchParams.q,
-    filter: searchParams.filter,
-    page: searchParams.page ? +searchParams.page : 1,
-  });
+  const { userId } = auth();
+
+  let result;
+
+  if (searchParams?.filter === "recommended") {
+    if (userId) {
+      result = await getRecommendedQuestions({
+        userId,
+        searchQuery: searchParams.q,
+        page: searchParams.page ? +searchParams.page : 1,
+      });
+    } else {
+      result = {
+        questions: [],
+        isNext: false,
+      };
+    }
+  } else {
+    result = await getQuestions({
+      searchQuery: searchParams.q,
+      filter: searchParams.filter,
+      page: searchParams.page ? +searchParams.page : 1,
+    });
+  }
+
   return (
     <>
       <div className=" flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -42,8 +63,8 @@ const HomePage = async ({ searchParams }: SearchParamsProps) => {
       </div>
       <HomeFilter filters={HomePageFilters} />
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions.length > 0 ? (
-          questions.map((questions) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((questions) => (
             <QuestionCard
               key={questions._id}
               _id={questions._id}
@@ -67,8 +88,8 @@ const HomePage = async ({ searchParams }: SearchParamsProps) => {
       </div>
       <Pagination
         pageNumber={searchParams?.page ? +searchParams.page : 1}
-        isNext={isNext}
-        totalPages={totalPages}
+        isNext={result.isNext}
+        totalPages={result.totalPages || 1}
       />
     </>
   );

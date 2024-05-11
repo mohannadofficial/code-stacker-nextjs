@@ -45,7 +45,7 @@ const ParseHTML = ({ data }: Props) => {
   }, [loading]);
 
   return (
-    <div className={"markdown w-full min-w-full"}>
+    <div className={"markdown w-full min-w-full dark:text-white"}>
       {loading ? parse("") : parse(data)}
     </div>
   );
