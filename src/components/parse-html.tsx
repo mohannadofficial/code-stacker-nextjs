@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Prism from "prismjs";
 import parse from "html-react-parser";
@@ -33,11 +33,22 @@ interface Props {
 }
 
 const ParseHTML = ({ data }: Props) => {
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    Prism.highlightAll();
-  }, []);
+    setLoading(true);
+    const hightLight = async () => {
+      await Prism.highlightAll();
+      setLoading(false);
+    };
 
-  return <div className="break-words dark:text-white">{parse(data)}</div>;
+    hightLight();
+  }, [loading]);
+
+  return (
+    <div className={"markdown w-full min-w-full"}>
+      {loading ? parse("") : parse(data)}
+    </div>
+  );
 };
 
 export default ParseHTML;

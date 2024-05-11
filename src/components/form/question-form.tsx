@@ -23,6 +23,7 @@ import { Button } from "../ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { createQuestion, editQuestion } from "@/actions/question";
 import { useTheme } from "@/context/ThemeProvider";
+import { toast } from "../ui/use-toast";
 
 interface Props {
   type?: "Edit" | "Create";
@@ -61,6 +62,10 @@ const QuestionForm = ({ userId, type, questionDetails }: Props) => {
           content: values.explanation,
           path: pathname,
         });
+        toast({
+          title: "Question edited successfully",
+          variant: "default",
+        });
         router.push(`/question/${parsedQuestionDetails?._id}`);
       } else {
         await createQuestion({
@@ -70,7 +75,10 @@ const QuestionForm = ({ userId, type, questionDetails }: Props) => {
           path: pathname,
           author: JSON.parse(userId),
         });
-
+        toast({
+          title: "Question posted successfully",
+          variant: "default",
+        });
         router.push("/");
       }
     } catch (error) {

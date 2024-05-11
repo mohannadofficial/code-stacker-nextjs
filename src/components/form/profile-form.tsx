@@ -18,6 +18,7 @@ import {
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
+import { toast } from "../ui/use-toast";
 
 interface Props {
   clerkId: string;
@@ -55,7 +56,10 @@ const ProfileForm = ({ clerkId, user }: Props) => {
         },
         path: pathname,
       });
-
+      toast({
+        title: "Profile updated successfully!",
+        variant: "default",
+      });
       router.back();
     } catch (error) {
       console.log(error);
@@ -75,13 +79,13 @@ const ProfileForm = ({ clerkId, user }: Props) => {
           name="name"
           render={({ field }) => (
             <FormItem className="space-y-3.5">
-              <FormLabel>
+              <FormLabel className="paragraph-semibold text-dark400_light800">
                 Name <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl>
                 <Input
                   placeholder="Your name"
-                  className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  className="no-focus paragraph-regular light-border-2 background-light800_dark300 text-dark300_light700 min-h-[56px] border"
                   {...field}
                 />
               </FormControl>
@@ -100,7 +104,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
               <FormControl>
                 <Input
                   placeholder="Your username"
-                  className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  className="no-focus paragraph-regular light-border-2 background-light800_dark300 text-dark300_light700 min-h-[56px] border"
                   {...field}
                 />
               </FormControl>
@@ -118,7 +122,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
                 <Input
                   type="url"
                   placeholder="Your portfolio URL"
-                  className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  className="no-focus paragraph-regular light-border-2 background-light800_dark300 text-dark300_light700 min-h-[56px] border"
                   {...field}
                 />
               </FormControl>
@@ -132,11 +136,13 @@ const ProfileForm = ({ clerkId, user }: Props) => {
           name="location"
           render={({ field }) => (
             <FormItem className="space-y-3.5">
-              <FormLabel>Location</FormLabel>
+              <FormLabel className="paragraph-semibold text-dark400_light800">
+                Location
+              </FormLabel>
               <FormControl>
                 <Input
                   placeholder="Where are you from?"
-                  className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  className="no-focus paragraph-regular light-border-2 background-light800_dark300 text-dark300_light700 min-h-[56px] border"
                   {...field}
                 />
               </FormControl>
@@ -150,13 +156,13 @@ const ProfileForm = ({ clerkId, user }: Props) => {
           name="bio"
           render={({ field }) => (
             <FormItem className="space-y-3.5">
-              <FormLabel>
+              <FormLabel className="paragraph-semibold text-dark400_light800">
                 Bio <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="What's special about you?"
-                  className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  className="no-focus paragraph-regular light-border-2 background-light800_dark300 text-dark300_light700 min-h-[56px] border"
                   {...field}
                 />
               </FormControl>
