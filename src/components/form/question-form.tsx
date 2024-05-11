@@ -22,8 +22,8 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { createQuestion, editQuestion } from "@/actions/question";
-import { useTheme } from "@/context/ThemeProvider";
 import { toast } from "../ui/use-toast";
+import { useTheme } from "next-themes";
 
 interface Props {
   type?: "Edit" | "Create";
@@ -32,7 +32,7 @@ interface Props {
 }
 
 const QuestionForm = ({ userId, type, questionDetails }: Props) => {
-  const { mode } = useTheme();
+  const { resolvedTheme: mode } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();

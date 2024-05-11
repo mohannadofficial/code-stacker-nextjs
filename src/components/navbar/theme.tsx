@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useTheme } from "@/context/ThemeProvider";
 
 import {
   Menubar,
@@ -13,9 +12,10 @@ import {
 import Image from "next/image";
 import { themes } from "@/constants";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 
 const Theme = () => {
-  const { mode, setMode } = useTheme();
+  const { setTheme: setMode, resolvedTheme: mode } = useTheme();
   return (
     <Menubar className="relative border-none bg-transparent shadow-none">
       <MenubarMenu>

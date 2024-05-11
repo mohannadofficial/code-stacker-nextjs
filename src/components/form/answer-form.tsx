@@ -1,6 +1,5 @@
 "use client";
 
-import { useTheme } from "@/context/ThemeProvider";
 import { AnswerSchema } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, useState } from "react";
@@ -18,6 +17,7 @@ import {
 import { Editor } from "@tinymce/tinymce-react";
 import { usePathname } from "next/navigation";
 import { createAnswer } from "@/actions/answer";
+import { useTheme } from "next-themes";
 
 interface Props {
   question: string;
@@ -29,7 +29,7 @@ const AnswerForm = ({ authorId, question, questionId }: Props) => {
   const pathname = usePathname();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmittingAI, setIsSubmittingAI] = useState(false);
-  const { mode } = useTheme();
+  const { resolvedTheme: mode } = useTheme();
   const editorRef = useRef();
   const form = useForm<z.infer<typeof AnswerSchema>>({
     resolver: zodResolver(AnswerSchema),

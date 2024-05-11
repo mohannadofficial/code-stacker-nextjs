@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import "../styles/prism.css";
-import { ThemeProvider } from "@/context/ThemeProvider";
+import { Providers as ThemeProvider } from "@/providers/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,9 +22,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "DevFlow",
+  title: "Code-Stacker",
   description:
-    "A community-driven platform for asking and answering programming questions. Get help, share knowledge, and collaborate with developers from around the world. Explore topics in web development, mobile app development, algorithms, data structures, and more.",
+    "Code Stacker is a platform for developers to share and discover new resources, tools, and projects to help them grow in their careers and build better software products for the world to use and enjoy.",
   icons: {
     icon: "/assets/images/site-logo.svg",
   },
