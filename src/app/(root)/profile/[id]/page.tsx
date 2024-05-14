@@ -6,12 +6,24 @@ import Stats from "@/components/stats";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getJoinedDate, removeKeysFromQuery } from "@/lib/utils";
-import { URLProps } from "@/types";
+import { ParamsProps, URLProps } from "@/types";
 import { SignedIn } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
+import { Metadata } from "next";
 
 import Image from "next/image";
 import Link from "next/link";
+
+export async function generateMetadata({
+  params,
+}: ParamsProps): Promise<Metadata> {
+  const { user } = await getUserInfo({ userId: params.id });
+
+  return {
+    title: `${user.name}`,
+    description: `Details of the user: ${user.name}`,
+  };
+}
 
 const ProfilePage = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();

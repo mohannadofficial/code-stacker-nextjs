@@ -10,6 +10,12 @@ import Link from "next/link";
 import { SearchParamsProps } from "@/types";
 import Pagination from "@/components/pagination";
 import { auth } from "@clerk/nextjs/server";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description: "Home page of the Code Stacker platform.",
+};
 
 const HomePage = async ({ searchParams }: SearchParamsProps) => {
   const { userId } = auth();

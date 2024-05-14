@@ -5,7 +5,13 @@ import Pagination from "@/components/pagination";
 import Search from "@/components/search";
 import { TagFilters } from "@/constants/filters";
 import { SearchParamsProps } from "@/types";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Tags",
+  description: "Tags page of the Code Stacker platform.",
+};
 
 const TagsPage = async ({ searchParams }: SearchParamsProps) => {
   const { tags, isNext, totalPages } = await getTags({

@@ -75,6 +75,8 @@ const Search = () => {
           className="cursor-pointer"
         />
         <Input
+          id="search"
+          name="search"
           type="text"
           placeholder="Search anything globally..."
           value={search}

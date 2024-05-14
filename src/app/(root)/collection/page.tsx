@@ -8,6 +8,12 @@ import { QuestionFilters } from "@/constants/filters";
 import { SearchParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
 import Loading from "./loading";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Saved Questions",
+  description: "Saved Questions page of the Code Stacker platform.",
+};
 
 const CollectionPage = async ({ searchParams }: SearchParamsProps) => {
   const { userId } = auth();

@@ -62,6 +62,23 @@ export async function getTags(params: GetAllTagsParams) {
   }
 }
 
+export async function getTagById(tagId: string) {
+  try {
+    await connectDB();
+
+    const tag = await Tag.findById(tagId);
+
+    if (!tag) {
+      throw new Error("Tag not found");
+    }
+
+    return tag;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
   try {
     await connectDB();

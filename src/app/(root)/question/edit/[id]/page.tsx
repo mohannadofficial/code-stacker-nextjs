@@ -4,6 +4,18 @@ import QuestionForm from "@/components/form/question-form";
 
 import { ParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: ParamsProps): Promise<Metadata> {
+  const question = await getQuestionById({ questionId: params.id });
+
+  return {
+    title: `Edit question: ${question.title}`,
+    description: `Edit question: ${question.title}`,
+  };
+}
 
 const EditQuestionPage = async ({ params: { id } }: ParamsProps) => {
   const { userId } = auth();

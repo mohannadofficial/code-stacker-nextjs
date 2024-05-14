@@ -22,7 +22,10 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Code-Stacker",
+  title: {
+    default: "Code Stacker",
+    template: "%s | Code Stacker",
+  },
   description:
     "Code Stacker is a platform for developers to share and discover new resources, tools, and projects to help them grow in their careers and build better software products for the world to use and enjoy.",
   icons: {
@@ -41,16 +44,19 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceGrotesk.variable}`}
         suppressHydrationWarning={true}
       >
-        <ClerkProvider
-          appearance={{
-            elements: {
-              formButtonPrimary: "primary-gradient",
-              footerActionLink: "primary-text-gradient hover:text-primary-500",
-            },
-          }}
-        >
-          <ThemeProvider>{children}</ThemeProvider>
-        </ClerkProvider>
+        <ThemeProvider>
+          <ClerkProvider
+            appearance={{
+              elements: {
+                formButtonPrimary: "primary-gradient",
+                footerActionLink:
+                  "primary-text-gradient hover:text-primary-500",
+              },
+            }}
+          >
+            {children}
+          </ClerkProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

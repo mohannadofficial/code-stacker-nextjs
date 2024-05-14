@@ -1,7 +1,14 @@
 import { getUserById } from "@/actions/user";
+
 import ProfileForm from "@/components/form/profile-form";
 import { ParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Edit Profile",
+  description: "Edit Profile page of the Code Stacker platform.",
+};
 
 const EditProfilePage = async ({ params }: ParamsProps) => {
   const { userId } = auth();

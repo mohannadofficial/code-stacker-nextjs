@@ -70,6 +70,8 @@ const Search = ({
         className="cursor-pointer"
       />
       <Input
+        id="localSearch"
+        name="localSearch"
         type="text"
         placeholder={placeholder}
         value={search}

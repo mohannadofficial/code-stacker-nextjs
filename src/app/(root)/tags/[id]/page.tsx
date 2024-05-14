@@ -1,11 +1,23 @@
-import { getQuestionsByTagId } from "@/actions/tag";
+import { getQuestionsByTagId, getTagById } from "@/actions/tag";
 import Page from "@/app/(auth)/sign-in/[[...sign-in]]/page";
 import QuestionCard from "@/components/card/question-card";
 import Empty from "@/components/empty";
 import Pagination from "@/components/pagination";
 import Search from "@/components/search";
 import { IQuestion } from "@/db/question.model";
-import { URLProps } from "@/types";
+import { ParamsProps, URLProps } from "@/types";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: ParamsProps): Promise<Metadata> {
+  const tag = await getTagById(params.id);
+
+  return {
+    title: tag.name,
+    description: `All questions related to ${tag.name}`,
+  };
+}
 
 const QuestionByTagPage = async ({ params, searchParams }: URLProps) => {
   const { questions, tagTitle, isNext, totalPages } = await getQuestionsByTagId(

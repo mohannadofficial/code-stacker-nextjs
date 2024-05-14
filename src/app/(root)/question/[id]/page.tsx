@@ -8,11 +8,22 @@ import ParseHTML from "@/components/parse-html";
 import Tags from "@/components/tags";
 import Votes from "@/components/votes";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
-import { URLProps } from "@/types";
+import { ParamsProps, URLProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
+
+export async function generateMetadata({
+  params,
+}: ParamsProps): Promise<Metadata> {
+  const question = await getQuestionById({ questionId: params.id });
+
+  return {
+    title: `${question.title}`,
+    description: `Details of the question: ${question.title}`,
+  };
+}
 
 const QuestionPage = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();

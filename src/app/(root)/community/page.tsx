@@ -7,6 +7,12 @@ import Link from "next/link";
 import React from "react";
 import { SearchParamsProps } from "@/types";
 import Pagination from "@/components/pagination";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Community",
+  description: "Community page of the Code Stacker platform.",
+};
 
 const CommunityPage = async ({ searchParams }: SearchParamsProps) => {
   const { users, isNext, totalPages } = await getUsers({

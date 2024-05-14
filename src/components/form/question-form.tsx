@@ -160,6 +160,7 @@ const QuestionForm = ({ userId, type, questionDetails }: Props) => {
               </FormLabel>
               <FormControl>
                 <Editor
+                  id="explanation"
                   apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
                   onInit={(evt, editor) => {
                     // @ts-ignore
@@ -217,6 +218,8 @@ const QuestionForm = ({ userId, type, questionDetails }: Props) => {
               <FormControl>
                 <>
                   <Input
+                    id="tags"
+                    name="tags"
                     disabled={type === "Edit"}
                     className="no-focus paragraph-regular background-light900_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
                     placeholder="Add tags..."

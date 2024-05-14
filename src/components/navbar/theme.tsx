@@ -15,7 +15,8 @@ import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 
 const Theme = () => {
-  const { setTheme: setMode, resolvedTheme: mode } = useTheme();
+  const { setTheme: setMode, resolvedTheme: mode, theme } = useTheme();
+
   return (
     <Menubar className="relative border-none bg-transparent shadow-none">
       <MenubarMenu>

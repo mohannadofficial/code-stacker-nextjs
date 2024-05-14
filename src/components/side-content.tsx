@@ -43,6 +43,7 @@ const SideContent = ({ isLeftSideBar = false }: Props) => {
           width={20}
           height={20}
           className={cn("invert-colors", isActive && "invert-0 dark:invert")}
+          style={{ width: "auto", height: "auto" }}
         />
         <p
           className={cn(
