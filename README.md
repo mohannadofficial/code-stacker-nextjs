@@ -1,6 +1,6 @@
 # 📃 Code Stacker: Your Ultimate Coding Destination! 🚀
 
-![Alt text](https://pouch.jumpshare.com/preview/gVlBurwdFWZJyRXAS9HkxLWHMGIHHw2kV95lTkbpZiJSyg00rZB0sQMUFE17BP3-zti2kxmKN3TSINWuPjtQntjEBm6GU50Zrl4S2HIiZQU)
+![Alt text](https://raw.githubusercontent.com/mohannadofficial/stack_overflow_clone_next.js14/80b23a5359f2d4b31be8a6164d90e039714df397/public/assets/images/cover.svg?token=AYWQAJF7VJRN7ATD6TMX2KLGJCVXI)
 
 Code Stacker is a Stack Overflow clone built with cutting-edge technologies to provide a seamless Q&A experience for developers, The frontend is powered by Next.js, while the backend utilizes Mongoose for data
 
