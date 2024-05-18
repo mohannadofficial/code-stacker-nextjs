@@ -55,13 +55,13 @@ Before you begin, ensure you have the following software installed on your local
 1. Clone the Repository:
 
 ```bash
-git clone https://github.com/mohannadofficial/stack_overflow_clone_next.js14.git
+git clone https://github.com/mohannadofficial/code-stacker-nextjs.git
 ```
 
 2. Install Dependencies:
 
 ```bash
-cd stack_overflow_clone_next.js14
+cd code-stacker-nextjs
 npm install
 ```
 
