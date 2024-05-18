@@ -103,6 +103,7 @@ const AnswerForm = ({ authorId, question, questionId }: Props) => {
         <Button
           className="btn light-border-2 gap-1.5 rounded-md px-4 py-2.5 text-primary-500 shadow-none dark:text-primary-500"
           onClick={generateAIAnswer}
+          disabled
         >
           {isSubmittingAI ? (
             <>Generating...</>
@@ -115,7 +116,7 @@ const AnswerForm = ({ authorId, question, questionId }: Props) => {
                 height={12}
                 className="object-contain"
               />
-              Generate an AI Answer
+              Generate an AI Answer (Soon)
             </>
           )}
         </Button>

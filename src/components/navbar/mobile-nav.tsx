@@ -36,7 +36,7 @@ const MobileNav = () => {
             width={23}
           />
           <p className="h2-bold text-dark100_light900 font-spaceGrotesk">
-            Dev <span className="text-primary-500">OverFlow</span>
+            Code <span className="text-primary-500">Stacker</span>
           </p>
         </Link>
         <div>

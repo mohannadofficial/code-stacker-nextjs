@@ -1,5 +1,6 @@
 "use server";
 
+import Interaction from "@/db/interaction.model";
 import Question from "@/db/question.model";
 import Tag, { ITag } from "@/db/tag.model";
 import User from "@/db/user.model";
@@ -82,18 +83,21 @@ export async function getTagById(tagId: string) {
 export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
   try {
     await connectDB();
-
     const { userId } = params;
-    const user = await User.findById(userId);
+    const user = await User.findById(JSON.parse(userId));
 
     if (!user) throw new Error("User not found");
 
-    // TODO: TAG IMPLEMENT
+    // Find the user's interactions where actions equal "ask_question" or "answer" and return tags name without duplicates
+    const userInteractions = await Interaction.find({
+      user: user._id,
+      action: { $in: ["ask_question", "answer"] },
+    }).distinct("tags");
 
-    return [
-      { _id: "1", name: "tag" },
-      { _id: "2", name: "tag2" },
-    ];
+    // Extract tags from user's interactions limited to 3 tags
+    const tags = await Tag.find({ _id: { $in: userInteractions } }).limit(5);
+    // return list of tags
+    return tags;
   } catch (error) {
     console.log(error);
     throw error;

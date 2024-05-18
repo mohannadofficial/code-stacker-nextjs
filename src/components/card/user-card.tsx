@@ -17,7 +17,9 @@ interface Props {
 }
 
 const UserCard = async ({ user }: Props) => {
-  const interactedTags = await getTopInteractedTags({ userId: user._id });
+  const interactedTags = await getTopInteractedTags({
+    userId: JSON.stringify(user._id),
+  });
   return (
     <div className="shadow-light100_darknone w-full max-xs:min-w-full xs:w-[260px]">
       <article className="background-light900_dark200 light-border flex w-full flex-col items-center justify-center rounded-2xl border p-8">
@@ -41,10 +43,14 @@ const UserCard = async ({ user }: Props) => {
         </Link>
         <div className="mt-5">
           {interactedTags.length > 0 ? (
-            <div className="flex items-center gap-2">
-              {interactedTags.map((tag) => (
-                <Tags key={tag._id} _id={tag._id} name={tag.name} />
-              ))}
+            <div className="flex flex-wrap items-center gap-2">
+              {interactedTags.map((tag: any, index: number) => {
+                if (index > 3) {
+                  return null;
+                } else {
+                  return <Tags key={tag._id} _id={tag._id} name={tag.name} />;
+                }
+              })}
             </div>
           ) : (
             <Badge>No tags yet</Badge>
