@@ -168,7 +168,7 @@ NEXT_PUBLIC_RAPID_API_KEY=your_rapidapi_jsearch_api_key
 
 ## ⭐ Like this project?
 
-If you find this Duolingo clone project helpful, consider giving it a star on GitHub to show your support! This helps others discover the project and motivates me to continue development.
+If you find this Code Stacker project helpful, consider giving it a star on GitHub to show your support! This helps others discover the project and motivates me to continue development.
 
 ## 🙌 Contributing
 
